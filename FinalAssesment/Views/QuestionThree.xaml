@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalAssesment.Views.QuestionThree"
+             xmlns:viewModel="clr-namespace:FinalAssesment.ViewModels"
+             xmlns:model="clr-namespace:FinalAssesment.Models"
+             x:DataType="viewModel:QuestionThreeViewModel"
+             Shell.NavBarIsVisible="False"
+             Title="QuestionThree"
+             BackgroundColor="LightGray">
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        ColumnDefinitions="Auto,*">
+        <StackLayout
+            Grid.Column="1">
+            
+            <Border
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                HeightRequest="50"
+                BackgroundColor="DarkBlue"
+                StrokeThickness="0"
+                Margin="-1">
+                <Label
+                    Text="Add"
+                    TextColor="White"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Margin="0,0,20,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding AddPostCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+
+            <Grid
+                ColumnDefinitions="8*,2*"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="White"
+                IsVisible="{Binding ShowAdd}">
+                <StackLayout
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand">
+                    <Border
+                        HorizontalOptions="FillAndExpand"
+                        StrokeThickness="0">
+                        <HorizontalStackLayout
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20,10">
+                            <Label
+                                Text="Title: "
+                                VerticalOptions="Center"
+                                FontAttributes="Bold" />
+                            <Entry
+                                Placeholder="Title"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="Transparent"
+                                Text="{Binding Title}" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <Border
+                        HorizontalOptions="FillAndExpand"
+                        StrokeThickness="0">
+                        <HorizontalStackLayout
+                            HorizontalOptions="FillAndExpand"
+                            Margin="20,10">
+                            <Label
+                                Text="Body: "
+                                VerticalOptions="Center"
+                                FontAttributes="Bold" />
+                            <Entry
+                                Placeholder="Description"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                BackgroundColor="Transparent"
+                                Text="{Binding Description}" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </StackLayout>
+
+                <Button
+                    Text="Save"
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    Margin="10,10"
+                    VerticalOptions="End"
+                    Command="{Binding CreatePostCommand}" />
+            </Grid>
+        </StackLayout>
+
+        <CollectionView ItemsSource="{Binding Record}"
+                        Margin="0,50,0,0"
+                        Grid.Column="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        BackgroundColor="White"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="150"
+                        Margin="20"
+                        Stroke="Black"
+                        x:DataType="model:PostRecord">
+                        <Border.StrokeShape>
+                            <RoundRectangle
+                                CornerRadius="20" />
+                        </Border.StrokeShape>
+
+                        <StackLayout
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Text="{Binding Title}"
+                                Margin="20,20,0,10"
+                                FontAttributes="Bold"
+                                TextColor="DarkSlateGray" />
+
+                            <Label
+                                Text="{Binding Body}"
+                                Margin="20,0"
+                                TextColor="Gray" />
+                        </StackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </Grid>
+</ContentPage>
